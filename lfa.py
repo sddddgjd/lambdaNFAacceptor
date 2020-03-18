@@ -50,15 +50,17 @@ for test in teste:
     while start < end and coada[start]["step"] == currentStep:
 
       #if it's a normal transition increase the current ste[]
-      if char in nextState[coada[start]["state"]]:
-        for newState in nextState[coada[start]["state"]][char]:
+      currentState = coada[start]["state"]
+
+      if char in nextState[currentState]:
+        for newState in nextState[currentState][char]:
           coada.append({'step': currentStep + 1, 'state': newState})
           end = end + 1
 
       #if we have a lambda transition we don't want to increase the current step
       #since a lambda transition doesn't read a character
-      if '$' in nextState[coada[start]["state"]]:
-        for newState in nextState[coada[start]["state"]]['$']:
+      if '$' in nextState[currentState]:
+        for newState in nextState[currentState]['$']:
           coada.append({'step': currentStep, 'state': newState})
           end = end + 1
 
